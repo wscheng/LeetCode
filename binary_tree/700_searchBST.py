@@ -48,6 +48,7 @@ public_method_names = [method for method in dir(Solution) if callable(getattr(So
 x = Solution()
 for method in public_method_names:
     # TODO print tree method
+    print("= Solution", method,"=")
     getattr(x, method)(a, 12)  # call
 
 # TODO Unit Test
