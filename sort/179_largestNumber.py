@@ -97,6 +97,7 @@ for method in sorted(public_method_names):
     print(getattr(x, method)([0, 0, 0]))
     # TODO Unit Test
 
+# https://leetcode.com/problems/largest-number/discuss/53270/Python-simple-solution-in-4-lines
 # class Solution:
 #     # @param num, a list of integers
 #     # @return a string
