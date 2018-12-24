@@ -1,8 +1,7 @@
-from binary_tree import TreeNode
+from binary_tree import TreeNode, string_to_tree_node
 
 
 class Solution(object):
-
     def searchBST_by_recursion(self, root, val):
         """
         :type root: TreeNode
@@ -35,20 +34,19 @@ class Solution(object):
         else:
             return self.searchBST_by_iteration(root.right, val)
 
+
 # TODO build tree from string method
 # testCase
 #    20
 #   /  \
 #  12  25
-a = TreeNode(20)
-a.left = TreeNode(12)
-a.right = TreeNode(25)
+a = string_to_tree_node("[20, 12, 25]")
 
-public_method_names = [method for method in dir(Solution) if callable(getattr(Solution, method)) if not method.startswith('_')]  # 'private' methods start from _
+public_method_names = [method for method in dir(Solution) if callable(getattr(Solution, method)) if
+                       not method.startswith('_')]  # 'private' methods start from _
 x = Solution()
 for method in public_method_names:
-    # TODO print tree method
-    print("= Solution", method,"=")
-    getattr(x, method)(a, 12)  # call
+    print("= Solution", method, "=")
+    print(getattr(x, method)(a, 12))  # call
 
-# TODO Unit Test
+    # TODO Unit Test
