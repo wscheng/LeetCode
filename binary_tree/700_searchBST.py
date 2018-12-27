@@ -35,7 +35,6 @@ class Solution(object):
             return self.searchBST_by_iteration(root.right, val)
 
 
-# TODO build tree from string method
 # testCase
 #    20
 #   /  \

@@ -15,7 +15,7 @@ class Solution(object):
                 j += 1
         return max_water
 
-    def maxArea_select_only_biggest(self, height):
+    def maxArea_select_only_biggest_TLE(self, height):
         """
         :type height: List[int]
         :rtype: int
