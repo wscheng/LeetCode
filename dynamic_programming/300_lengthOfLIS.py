@@ -138,3 +138,5 @@ for method in sorted(public_method_names):
     print(getattr(x, method)([10, 9, 2, 2, 5, 3, 7, 101, 18]))
     # Wrong Answer
     print(getattr(x, method)([-2, -1]))
+    # How many the same LIS?
+    # 673. Number of Longest Increasing Subsequence
