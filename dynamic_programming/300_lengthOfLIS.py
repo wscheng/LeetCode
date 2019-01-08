@@ -42,6 +42,9 @@ class Solution(object):
         lis_len = 0
         for i in range(len_nums):
             j = 0
+            # compare with lis_arr and decide where to insert
+            # j is index for lis_arr
+            # can replace this part to binary search
             while j < len_nums:
                 if lis_arr[j] is None:
                     break
@@ -52,6 +55,7 @@ class Solution(object):
                     break
                 j += 1
 
+            # if bigger than all in lis_arr insert
             if lis_len == j:
                 lis_len += 1
                 lis_arr[j] = nums[i]

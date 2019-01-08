@@ -32,6 +32,8 @@ class Solution(object):
             end += 1
             # can return end -start, and don't need this line
             max_len = max(end-start, max_len)
+            # NOTE: The minimum runtime of java can be less than 10ms. But the minimum runtime of python is about
+            # 60ms.
         return max_len
 
     # def characterReplacement_runtime_error(self, s, k):
