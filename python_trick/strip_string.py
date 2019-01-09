@@ -1,4 +1,4 @@
-x = " [string with blank]      "
+x = " [string_problem with blank]      "
 x.strip()
 print(x)
 x = x.strip()

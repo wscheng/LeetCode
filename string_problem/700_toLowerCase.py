@@ -1,3 +1,8 @@
+import unittest
+
+import dynamic_test_case
+
+
 class Solution(object):
     def toLowerCase(self, str):
         """
@@ -14,10 +19,14 @@ class Solution(object):
         return lower_str
 
 
-public_method_names = [method for method in dir(Solution) if callable(getattr(Solution, method)) if
-                       not method.startswith('_')]  # 'private' methods start from _
+class TestMySolutions(unittest.TestCase):
+    pass
+
 
 x = Solution()
-for method in sorted(public_method_names):
-    print("= Solution", method, "=")
-    print(getattr(x, method)("Hello"))
+dynamic_test_case.gen_test(TestMySolutions, x,
+                           (("Hello",), "hello"),
+                           (("KKK",), "kkk"),
+                           (("CCC DDD",), "ccc ddd"),
+                           (("DDD",), "ddd"))
+unittest.main()

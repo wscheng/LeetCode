@@ -60,14 +60,18 @@ class Solution(object):
                 num += 1
         return num
 
-# Using list and dict here is almost the same speed in python. They are all 36ms.
 
-public_method_names = [method for method in dir(Solution) if callable(getattr(Solution, method)) if
-                       not method.startswith('_')]  # 'private' methods start from _
+import unittest
+import dynamic_test_case
+
+
+class TestMySolutions(unittest.TestCase):
+    pass
+
 
 x = Solution()
-for method in sorted(public_method_names):
-    print("= Solution", method, "=")
-    print(getattr(x, method)("aA", "AaaaBBB"))
-    print(getattr(x, method)("z", "ZZ"))
-    print(getattr(x, method)("aA", "aAAbbbb"))
+dynamic_test_case.gen_test(TestMySolutions, x,
+                           (("aA", "AaaaBBB"), 4),
+                           (("z", "ZZ"), 0),
+                           (("aA", "aAAbbbb"), 3))
+unittest.main()
