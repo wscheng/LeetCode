@@ -74,4 +74,6 @@ dynamic_test_case.gen_test(TestMySolutions, x,
                            (("aA", "AaaaBBB"), 4),
                            (("z", "ZZ"), 0),
                            (("aA", "aAAbbbb"), 3))
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
+

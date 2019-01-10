@@ -1,3 +1,6 @@
+from detect_version import is_python3, is_python2
+
+
 class Solution(object):
     def largestNumber_self_solution(self, nums):
         """
@@ -51,8 +54,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: str
         """
-        str_nums = map(str, nums)
-        str_nums = sorted(str_nums, cmp=lambda a, b: 1 if a + b > b + a else -1 if a + b < b + a else 0)
+
+        str_nums = list(map(str, nums)) if is_python3() else map(str, nums)
+
+        if is_python3():
+            str_nums = sorted(str_nums, key=lambda a, b: 1 if a + b > b + a else -1 if a + b < b + a else 0)
+        elif is_python2():
+            str_nums = sorted(str_nums, cmp=lambda a, b: 1 if a + b > b + a else -1 if a + b < b + a else 0)
         ans = ""
         for i in range(len(str_nums) - 1, -1, -1):
             ans += str_nums[i]
@@ -66,36 +74,50 @@ class Solution(object):
         :type nums: List[int]
         :rtype: str
         """
-        str_nums = map(str, nums)
+        str_nums = list(map(str, nums)) if is_python3() else map(str, nums)
+
         # use reversed in sorted
-        str_nums = sorted(str_nums, cmp=lambda a, b: 1 if a + b > b + a else -1 if a + b < b + a else 0, reverse=True)
+        if is_python3():
+            str_nums = sorted(str_nums, key=lambda a, b: 1 if a + b > b + a else -1 if a + b < b + a else 0,
+                              reverse=True)
+        elif is_python2():
+            str_nums = sorted(str_nums, cmp=lambda a, b: 1 if a + b > b + a else -1 if a + b < b + a else 0,
+                              reverse=True)
+
         # use type transform to solve the all zero case
         return str(int("".join(str_nums)))
 
-public_method_names = [method for method in dir(Solution) if callable(getattr(Solution, method)) if
-                       not method.startswith('_')]  # 'private' methods start from _
-x = Solution()
+import unittest
+import dynamic_test_case
 
-for method in sorted(public_method_names):
-    print("= Solution", method, "=")
-    print(getattr(x, method)([10, 2]))
-    print(getattr(x, method)([3, 30, 34, 5, 9]))
-    print(getattr(x, method)([0]))
-    print(getattr(x, method)([8, 89, 98]))
-    print(getattr(x, method)([8, 0, 9]))
-    print(getattr(x, method)([98, 30, 9, 33, 34, 10000000, 122222, 99999, 97, 8]))
-    print(getattr(x, method)([87888, 878888]))
-    print(getattr(x, method)([87888, 878887]))
-    print(getattr(x, method)([87888, 878889]))
-    #
-    print(getattr(x, method)([87888, 8788888]))
-    print(getattr(x, method)([87888, 8788887]))
-    print(getattr(x, method)([87888, 8788889]))
-    print(getattr(x, method)([1111, 111112]))
-    print(getattr(x, method)([2222, 2222221]))
-    # evil cases
-    print(getattr(x, method)([0, 0, 0]))
-    # TODO Unit Test
+
+class TestMySolutions(unittest.TestCase):
+    pass
+
+
+x = Solution()
+dynamic_test_case.gen_test(TestMySolutions, x,
+                           (([10, 2],), '210'),
+                           (([10, 2],), '210'),
+                           (([3, 30, 34, 5, 9],), '9534330'),
+                           (([0],), '0'),
+                           (([8, 89, 98],), '98898'),
+                           (([8, 0, 9],), '980'),
+                           (([98, 30, 9, 33, 34, 10000000, 122222, 99999, 97, 8],), '9999999897834333012222210000000'),
+                           (([87888, 878888],), '87888887888'),
+                           (([87888, 878887],), '87888878887'),
+                           (([87888, 878889],), '87888987888'),
+                           #
+                           (([87888, 8788888],), '878888887888'),
+                           (([87888, 8788887],), '878888788887'),
+                           (([87888, 8788889],), '878888987888'),
+                           (([1111, 111112],), '1111121111'),
+                           (([2222, 2222221],), '22222222221'),
+                           # evil cases
+                           (([0, 0, 0],), '0'))
+
+if __name__ == '__main__':
+    unittest.main()
 
 # https://leetcode.com/problems/largest-number/discuss/53270/Python-simple-solution-in-4-lines
 # class Solution:

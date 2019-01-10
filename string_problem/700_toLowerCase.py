@@ -29,4 +29,5 @@ dynamic_test_case.gen_test(TestMySolutions, x,
                            (("KKK",), "kkk"),
                            (("CCC DDD",), "ccc ddd"),
                            (("DDD",), "ddd"))
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
