@@ -17,9 +17,9 @@ def create_dynamic_method(output, expected):
 def gen_test(test_cls, cls, *input_expected_args):
     public_method_names = [method for method in dir(cls) if callable(getattr(cls, method)) if
                            not method.startswith('_')]  # 'private' methods start from _
-    i = 1
-    print("Tests:", public_method_names)
     for method in sorted(public_method_names):
+        print("Tests:", method)
+        i = 1
         for input_expected in input_expected_args:
             dynamic_method = create_dynamic_method(getattr(cls, method)(*input_expected[0]), input_expected[1])
             dynamic_method.__name__ = 'test_{0}_TestCase_{1}'.format(method, i)
