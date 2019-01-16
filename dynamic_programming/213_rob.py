@@ -1,5 +1,5 @@
 class Solution(object):
-    def rob_dp_bug_need_fix(self, nums):
+    def rob_dp_by_using_one_list(self, nums):
         """
         :type nums: List[int]
         :rtype: int
@@ -11,7 +11,8 @@ class Solution(object):
         elif len_nums <= 3:
             return max(nums)
         else:
-            dp = [[0, 0]] * len_nums
+            # NOTE: There are some trap in initialization, check python_trick/list_init_reference_trap.py
+            dp = [[0, 0] for i in range(len_nums)]
             # print(dp)
             # dp[x][0] is not choosing nums 1
             # dp[x][1] is choosing nums 1
@@ -20,7 +21,7 @@ class Solution(object):
             for i in range(2, len_nums - 1):
                 dp[i][0] = max(nums[i] + dp[i - 2][0], dp[i - 1][0])
                 dp[i][1] = max(nums[i] + dp[i - 2][1], dp[i - 1][1])
-            dp[-1] = max(dp[len_nums - 2][0], dp[len_nums - 2][0] + nums[-1], dp[len_nums - 2][1], dp[len_nums - 3][1])
+            dp[-1] = max(dp[len_nums - 2][0], dp[len_nums - 3][0] + nums[-1], dp[len_nums - 2][1], dp[len_nums - 3][1])
         return dp[-1]
 
     def rob_based_on_rob1_problem(self, nums):
@@ -71,6 +72,7 @@ dynamic_test_case.gen_test(TestMySolutions, x,
                            (([1],), 1),
                            # wrong ans
                            (([1, 7, 9, 2],), 10),
+                           (([1,3,1,3,100],), 103),
                            )
 if __name__ == '__main__':
     unittest.main()
