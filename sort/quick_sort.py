@@ -137,4 +137,4 @@ dynamic_test_case.gen_test(TestMySolutions, x,
                            )
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(exit=False)
